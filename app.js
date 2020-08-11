@@ -12,13 +12,17 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get("/", function(req, res) {
-  res.sendfile(__dirname + "/signup.html")
+  //res.sendfile(__dirname + "/signup.html")
+  res.sendfile(__dirname + "/index2.html")
 })
 //log user input
 app.post("/", function(req, res) {
   const name = req.body.FullName;
   const mob = req.body.Mobile;
   const email = req.body.Email;
+
+  const plan = req.body.Plan;
+
   const visit = req.body.dateOfVisit;
 
   const data =
@@ -33,6 +37,8 @@ app.post("/", function(req, res) {
         {
         NAME: name,
         PHONE: mob,
+        PLAN:plan,
+
         VISIT: visit
         }
       }
@@ -70,6 +76,10 @@ app.post("/failure",function(req,res){
 
 app.post("/success",function(req,res){
   res.redirect("/")
+});
+
+app.post("/signup",function(req,res){
+  res.sendFile(__dirname+"/signup.html")
 });
 
 app.listen(process.env.PORT || 3000, function() {
